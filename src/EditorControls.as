@@ -67,8 +67,10 @@ namespace Editor {
 
     void UpdateCamera() {
         auto editor = cast<CGameCtnEditorFree>(GetApp().Editor);
+        auto origPSZP = editor.OrbitalCameraControl.m_ParamScrollZoomPower;
+        editor.OrbitalCameraControl.m_ParamScrollZoomPower = 0;
         editor.ButtonZoomInOnClick();
-        editor.ButtonZoomOutOnClick();
+        editor.OrbitalCameraControl.m_ParamScrollZoomPower = origPSZP;
     }
 
     void SelectNext() {
