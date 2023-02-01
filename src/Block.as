@@ -8,7 +8,7 @@ class Block {
 
 vec3 GetBlockPosition(CGameCtnBlock@ block) {
     if (block.CoordX > 2000000000) {
-        // ghost block
+        // ghost block -- https://git.virtit.fr/beu/Openplanet-Plugins/src/branch/master/BlocksItemsCounter/Source/Libs/Objects.as#L55
         return Dev::GetOffsetVec3(block, 0x6c) + vec3(16, 4, 16);
     } else {
         // todo: pluginmaptype or calculate

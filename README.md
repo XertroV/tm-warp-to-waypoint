@@ -11,7 +11,7 @@ Indicators:
 - Linked Status
 - CP Group
 
-Prior/similar plugin: Beu's Blocks & Items Counter.
+Prior work: Beu's Blocks & Items Counter.
 
 License: Public Domain
 
