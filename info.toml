@@ -1,0 +1,8 @@
+[meta]
+name     = "Warp to Waypoint"
+author   = "XertroV"
+category = "Map Editor"
+version  = "0.1.0"
+
+[script]
+#__DEFINES__
