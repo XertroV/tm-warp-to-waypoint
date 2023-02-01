@@ -66,13 +66,13 @@ void Render() {
     if (cast<CGameCtnEditorFree>(GetApp().Editor) is null) return;
     if (GetApp().CurrentPlayground !is null) return;
     int2 wh = int2(400, 600);
-    auto cond = UI::Cond::Appearing;
-    // auto cond = UI::Cond::FirstUseEver;
+    // auto cond = UI::Cond::Appearing;
+    auto cond = UI::Cond::FirstUseEver;
     UI::SetNextWindowSize(wh.x, wh.y, cond);
     UI::SetNextWindowPos(Draw::GetWidth() - wh.x * 5 / 4, (Draw::GetHeight() - wh.y) / 2, cond);
     UI::PushStyleVar(UI::StyleVar::WindowTitleAlign, vec2(.5, .5));
     UI::PushFont(largerFont);
-    if (UI::Begin(MenuTitle, UI::WindowFlags::None)) {
+    if (UI::Begin(MenuTitle, ShowWindow, UI::WindowFlags::None)) {
         UI::PushFont(regularFont);
         // UI::Columns(3, "", false);
         auto initPos = UI::GetCursorPos();
