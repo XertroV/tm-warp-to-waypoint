@@ -17,6 +17,7 @@ class Waypoint {
     vec3 Position;
     nat3 GridPos;
     vec3 Direction;
+    vec3 SpawnLoc;
     WaypointType type;
     bool NoRespawn;
     bool IsItem = false;
@@ -37,6 +38,8 @@ class Waypoint {
         IsItem = true;
         MapElemColor = MEColor(int(item.MapElemColor));
         Name = item.ItemModel.Name; // also .Description, .NameE, .ArticlePointer.Name, .AritclePointer.NameOrDisplayName
+        SpawnLoc = GetItemModelSpawnLoc(item.ItemModel);
+        if (SpawnLoc.LengthSquared() > 0) SpawnLoc = Position + (EulerToMat(GetItemRotation(item)) * SpawnLoc).xyz;
         // NoRespawn = item.
         OnSpecialProperty(item.WaypointSpecialProperty);
         SetOtherProps();
@@ -49,6 +52,8 @@ class Waypoint {
         NoRespawn = block.BlockInfo.NoRespawn;
         Name = block.BlockInfo.Name;
         MapElemColor = MEColor(int(block.MapElemColor));
+        SpawnLoc = GetBlockSpawnLoc(block);
+        if (SpawnLoc.LengthSquared() > 0) SpawnLoc = Position + (GetBlockRotationMatrix(block) * SpawnLoc).xyz;
         OnSpecialProperty(block.WaypointSpecialProperty);
         SetOtherProps();
     }
@@ -171,7 +176,8 @@ class Waypoint {
     }
 
     void TargetMe() {
-        Editor::SetTargetedPosition(Position, false);
+        auto pos = S_WarpToSpawnLoc && SpawnLoc.LengthSquared() > 0 ? SpawnLoc : Position;
+        Editor::SetTargetedPosition(pos, false);
         Editor::SetOrbitalAngle(Math::ToRad(45), Math::ToRad(45));
     }
 
